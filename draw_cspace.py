@@ -18,9 +18,31 @@ def draw(ax, cspace, obstacles, qI, qG, G, path, title=""):
     draw_cspace(ax, cspace, obstacles)
     G.draw(ax)
     if qI is not None:
-        ax.plot([qI[0]], [qI[1]], "bx", markersize=10)
+        if len(qI) == 2:
+            ax.plot(qI[0], qI[1], "bx", markersize=10)
+        elif len(qI) == 3:
+            ax.plot(
+                qI[0],
+                qI[1],
+                marker=(3, 0, qI[2] * 180 / math.pi - 90),
+                markersize=15,
+                linestyle="None",
+                markerfacecolor="blue",
+                markeredgecolor="blue",
+            )
     if qG is not None:
-        ax.plot([qG[0]], [qG[1]], "bo", markersize=10)
+        if len(qI) == 2:
+            ax.plot(qG[0], qG[1], "bo", markersize=10)
+        elif len(qG) == 3:
+            ax.plot(
+                qG[0],
+                qG[1],
+                marker=(3, 0, qG[2] * 180 / math.pi - 90),
+                markersize=15,
+                linestyle="None",
+                markerfacecolor="red",
+                markeredgecolor="red",
+            )
     if len(path) > 0:
         ax.plot(
             [state[0] for state in path],
